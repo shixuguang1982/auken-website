@@ -40,6 +40,72 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
+    /* ---- Hero Carousel ---- */
+    const slides = document.querySelectorAll('.carousel-slide');
+    const dots = document.querySelectorAll('.carousel-dots .dot');
+    let currentSlide = 0;
+    let slideInterval;
+    const slideDuration = 5000;
+
+    function showSlide(index) {
+        slides.forEach(function (slide, i) {
+            slide.classList.toggle('active', i === index);
+        });
+        dots.forEach(function (dot, i) {
+            dot.classList.toggle('active', i === index);
+        });
+        currentSlide = index;
+    }
+
+    function nextSlide() {
+        const next = (currentSlide + 1) % slides.length;
+        showSlide(next);
+    }
+
+    function startCarousel() {
+        slideInterval = setInterval(nextSlide, slideDuration);
+    }
+
+    function stopCarousel() {
+        clearInterval(slideInterval);
+    }
+
+    if (slides.length > 0) {
+        dots.forEach(function (dot) {
+            dot.addEventListener('click', function () {
+                const index = parseInt(this.getAttribute('data-slide'), 10);
+                showSlide(index);
+                stopCarousel();
+                startCarousel();
+            });
+        });
+
+        const carousel = document.querySelector('.hero-carousel');
+        if (carousel) {
+            carousel.addEventListener('mouseenter', stopCarousel);
+            carousel.addEventListener('mouseleave', startCarousel);
+        }
+
+        startCarousel();
+    }
+
+    /* ---- Hero Tabs ---- */
+    const heroTabs = document.querySelectorAll('.hero-tab');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    heroTabs.forEach(function (tab) {
+        tab.addEventListener('click', function () {
+            const target = this.getAttribute('data-tab');
+
+            heroTabs.forEach(function (t) { t.classList.remove('active'); });
+            this.classList.add('active');
+
+            tabContents.forEach(function (content) {
+                content.classList.toggle('active', content.getAttribute('data-tab-content') === target);
+            });
+        });
+    });
+
     /* ---- Reveal on scroll ---- */
     const revealElements = document.querySelectorAll('.reveal');
 
@@ -60,7 +126,6 @@
             revealObserver.observe(el);
         });
     } else {
-        // Fallback: show all
         revealElements.forEach(function (el) {
             el.classList.add('visible');
         });
@@ -83,11 +148,9 @@
             function update(currentTime) {
                 const elapsed = currentTime - startTime;
                 const progress = Math.min(elapsed / duration, 1);
-                // Ease out cubic
                 const eased = 1 - Math.pow(1 - progress, 3);
                 const current = Math.floor(eased * target);
 
-                // Format large numbers
                 if (target >= 1000) {
                     counter.textContent = current.toLocaleString() + suffix;
                 } else {
@@ -146,7 +209,6 @@
     }
 
     if (form) {
-        // Clear errors on input
         ['name', 'email', 'country', 'message'].forEach(function (field) {
             const el = document.getElementById(field);
             if (el) {
@@ -195,7 +257,6 @@
             }
 
             if (valid) {
-                // Collect form data
                 var formData = {
                     name: name,
                     email: email,
@@ -206,15 +267,10 @@
                     timestamp: new Date().toISOString()
                 };
 
-                // Log for demo — in production, send to backend API
                 console.log('Inquiry submitted:', formData);
 
-                // Show success message
                 form.style.display = 'none';
                 formSuccess.classList.add('show');
-
-                // Optional: trigger WhatsApp/email pre-fill
-                // window.location.href = 'mailto:sales@aukenmachinery.com?subject=Inquiry from ' + name;
             }
         });
     }
@@ -224,7 +280,7 @@
     const navLinks = document.querySelectorAll('.nav-link');
 
     function updateActiveNav() {
-        var scrollPos = window.scrollY + 100;
+        var scrollPos = window.scrollY + 120;
 
         sections.forEach(function (section) {
             var top = section.offsetTop;
@@ -275,7 +331,6 @@ function resetForm() {
     form.style.display = 'block';
     success.classList.remove('show');
 
-    // Clear any errors
     ['name', 'email', 'country', 'message'].forEach(function (field) {
         var errorEl = document.getElementById('error-' + field);
         var inputEl = document.getElementById(field);
