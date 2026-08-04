@@ -319,8 +319,11 @@ input,select,textarea{font-family:inherit;font-size:14px}
 }
 @media (max-width:768px){
     .header-inner{gap:16px}
-    .nav{display:none;position:absolute;top:88px;left:0;right:0;background:#fff;flex-direction:column;padding:16px 0;box-shadow:0 8px 30px rgba(0,0,0,0.1);border-top:1px solid #eee}
+    .nav{display:none;position:absolute;top:88px;left:0;right:0;background:#fff;flex-direction:column;padding:16px 0;box-shadow:0 8px 30px rgba(0,0,0,0.1);border-top:1px solid #eee;max-height:calc(100vh - 88px);overflow-y:auto}
     .nav.open{display:flex}
+    .nav.open .nav-link{color:#333}
+    .nav.open .nav-link.active{color:#ff7a00}
+    .nav.open .nav-link.active::after{background:#ff7a00}
     .nav-link{padding:12px 24px}
     .menu-toggle{display:flex}
     .mega-menu{position:static;box-shadow:none;border:none;opacity:1;visibility:visible;transform:none;display:none;padding:0}
@@ -337,7 +340,11 @@ input,select,textarea{font-family:inherit;font-size:14px}
     .future-grid{grid-template-columns:repeat(2,1fr)}
     .footer-grid{grid-template-columns:1fr;gap:36px}
     .hero-title{font-size:32px}
-    .hero{height:420px}
+    .hero{height:auto;min-height:420px;padding-bottom:76px}
+    .hero-slide-inner{align-items:flex-start;padding-top:70px;padding-bottom:30px}
+    .hero-content{padding-top:0}
+    .hero-btns .btn-lg{padding:12px 24px;font-size:14px}
+    .hero-dots{bottom:90px}
     .hero-overlay{background:linear-gradient(180deg, rgba(2,12,27,0.7) 0%, rgba(2,12,27,0.6) 100%)}
     .section-title{font-size:28px}
     .about-stats{grid-template-columns:repeat(2,1fr)}
@@ -347,10 +354,14 @@ input,select,textarea{font-family:inherit;font-size:14px}
 }
 @media (max-width:480px){
     .product-grid{grid-template-columns:1fr}
-    .hero{height:360px}
-    .hero-title{font-size:26px}
-    .hero-btns{flex-direction:column}
-    .hero-desc{font-size:14px}
+    .hero{min-height:380px;padding-bottom:72px}
+    .hero-title{font-size:24px;margin-bottom:14px}
+    .hero-desc{font-size:14px;margin-bottom:20px;line-height:1.6}
+    .hero-btns{flex-direction:column;gap:10px}
+    .hero-btns .btn-lg{padding:11px 20px;font-size:13px;width:100%}
+    .hero-slide-inner{padding-top:55px}
+    .hero-dots{bottom:80px}
+    .hero-tab{padding:14px 12px;font-size:13px}
     .section{padding:60px 0}
     .section-title{font-size:24px}
     .about-stats{grid-template-columns:repeat(2,1fr)}
