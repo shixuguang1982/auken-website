@@ -504,22 +504,44 @@ if (inquiryForm) {
     var data = {};
     formData.forEach(function(v,k){ data[k] = v; });
 
-    fetch('https://formsubmit.co/ajax/sales@aukenmachinery.com', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify(data)
-    })
-    .then(function(res){ return res.json(); })
-    .then(function(res){
-      inquiryForm.style.display = 'none';
-      var success = document.getElementById('formSuccess');
-      if (success) success.style.display = 'block';
-    })
-    .catch(function(err){
-      btn.textContent = originalText;
-      btn.disabled = false;
-      alert('Submission failed. Please try again or contact us via WhatsApp.');
-    });
+    // Fetch client IP and geo info before submitting
+    fetch('https://ipapi.co/json/')
+      .then(function(r){ return r.json(); })
+      .then(function(geo){
+        if (geo && geo.ip) {
+          data['Client IP'] = geo.ip;
+          data['Country'] = (geo.country_name || '') + ' (' + (geo.country_code || '') + ')';
+          data['City'] = geo.city || '';
+          data['Region'] = geo.region || '';
+          data['ISP'] = geo.org || '';
+        }
+      })
+      .catch(function(){ /* IP fetch failed, continue without it */ })
+      .finally(function(){
+        // Always add browser info
+        data['Browser'] = navigator.userAgent;
+        data['Language'] = navigator.language;
+        data['Page URL'] = window.location.href;
+        data['Referrer'] = document.referrer || 'Direct visit';
+        data['Submitted At'] = new Date().toISOString();
+
+        fetch('https://formsubmit.co/ajax/sales@aukenmachinery.com', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(data)
+        })
+        .then(function(res){ return res.json(); })
+        .then(function(res){
+          inquiryForm.style.display = 'none';
+          var success = document.getElementById('formSuccess');
+          if (success) success.style.display = 'block';
+        })
+        .catch(function(err){
+          btn.textContent = originalText;
+          btn.disabled = false;
+          alert('Submission failed. Please try again or contact us via WhatsApp.');
+        });
+      });
   });
 }
 
