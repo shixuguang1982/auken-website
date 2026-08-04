@@ -446,10 +446,31 @@ if (inquiryForm) {
       whatsapp.focus();
       return;
     }
-    // Simulate submission
-    this.style.display = 'none';
-    var success = document.getElementById('formSuccess');
-    if (success) success.style.display = 'block';
+    var btn = this.querySelector('button[type="submit"]');
+    var originalText = btn.textContent;
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+
+    var formData = new FormData(this);
+    var data = {};
+    formData.forEach(function(v,k){ data[k] = v; });
+
+    fetch('https://formsubmit.co/ajax/sales@aukenmachinery.com', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(data)
+    })
+    .then(function(res){ return res.json(); })
+    .then(function(res){
+      inquiryForm.style.display = 'none';
+      var success = document.getElementById('formSuccess');
+      if (success) success.style.display = 'block';
+    })
+    .catch(function(err){
+      btn.textContent = originalText;
+      btn.disabled = false;
+      alert('Submission failed. Please try again or contact us via WhatsApp.');
+    });
   });
 }
 
