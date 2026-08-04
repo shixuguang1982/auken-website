@@ -504,20 +504,40 @@ if (inquiryForm) {
     var data = {};
     formData.forEach(function(v,k){ data[k] = v; });
 
-    // Fetch client IP and geo info before submitting
-    fetch('https://ipapi.co/json/')
-      .then(function(r){ return r.json(); })
-      .then(function(geo){
-        if (geo && geo.ip) {
-          data['Client IP'] = geo.ip;
-          data['Country'] = (geo.country_name || '') + ' (' + (geo.country_code || '') + ')';
-          data['City'] = geo.city || '';
-          data['Region'] = geo.region || '';
-          data['ISP'] = geo.org || '';
-        }
-      })
-      .catch(function(){ /* IP fetch failed, continue without it */ })
+    // Helper: fetch with timeout
+    function fetchWithTimeout(url, timeout){
+      return Promise.race([
+        fetch(url, {mode: 'cors'}).then(function(r){ return r.json(); }),
+        new Promise(function(_, reject){
+          setTimeout(function(){ reject(new Error('timeout')); }, timeout || 3000);
+        })
+      ]);
+    }
+
+    // Try multiple IP APIs and use the first successful one
+    var ipDetected = false;
+    function applyGeo(geo, source){
+      if (!geo || !geo.ip) return false;
+      data['Client IP'] = geo.ip;
+      data['IP Country'] = (geo.country_name || geo.country || '') + (geo.country_code ? ' (' + geo.country_code + ')' : '');
+      data['IP City'] = geo.city || '';
+      data['IP Region'] = geo.region || geo.regionName || '';
+      data['IP ISP'] = geo.org || geo.isp || geo.asn || '';
+      data['IP Source'] = source || 'unknown';
+      return true;
+    }
+
+    fetchWithTimeout('https://ipapi.co/json/', 2500)
+      .then(function(geo){ ipDetected = applyGeo(geo, 'ipapi.co') || ipDetected; })
+      .catch(function(){ return fetchWithTimeout('https://ipinfo.io/json', 2500); })
+      .then(function(geo){ if (geo && !ipDetected) ipDetected = applyGeo(geo, 'ipinfo.io') || ipDetected; })
+      .catch(function(){ return fetchWithTimeout('https://api.ipgeolocation.io/ipgeo?apiKey=00000000000000000000000000000000', 2000); })
+      .then(function(geo){ if (geo && !ipDetected) ipDetected = applyGeo(geo, 'ipgeolocation.io') || ipDetected; })
+      .catch(function(){ /* IP fetch failed completely, continue without it */ })
       .finally(function(){
+        if (!ipDetected) {
+          data['Client IP'] = 'Could not detect (client blocked IP API)';
+        }
         // Always add browser info
         data['Browser'] = navigator.userAgent;
         data['Language'] = navigator.language;
