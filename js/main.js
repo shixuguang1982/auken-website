@@ -410,6 +410,55 @@ document.addEventListener('click',function(e){
   }
 });
 
+// ===== QUOTE SUBMIT → FILL INQUIRY FORM =====
+document.addEventListener('click',function(e){
+  if (e.target.id !== 'quoteSubmitBtn') return;
+
+  // If no items selected, alert and stay
+  if (quoteItems.length === 0) {
+    alert('Please add at least one product to your quote list first.');
+    return;
+  }
+
+  // Build the product summary string
+  var productList = quoteItems.join(', ');
+
+  // Auto-select product category based on items
+  var productSelect = document.querySelector('#inquiryForm [name="product"]');
+  if (productSelect) {
+    var hasBrick = quoteItems.some(function(i){ return /QT|Brick|Block/i.test(i); });
+    var hasWood  = quoteItems.some(function(i){ return /WC|DC|CR|Wood|Chipper|Crusher|Hammer/i.test(i); });
+    var hasMetal = quoteItems.some(function(i){ return /SS|Shredder|Metal|Scrap/i.test(i); });
+    if (hasBrick && !hasWood && !hasMetal) productSelect.value = 'brick';
+    else if (hasWood && !hasBrick && !hasMetal) productSelect.value = 'wood';
+    else if (hasMetal && !hasBrick && !hasWood) productSelect.value = 'metal';
+    else productSelect.value = 'other';
+  }
+
+  // Pre-fill the message textarea with selected products
+  var msgField = document.querySelector('#inquiryForm [name="message"]');
+  if (msgField && !msgField.value.trim()) {
+    msgField.value = 'I am interested in the following products: ' + productList + '. Please send me quotation, specifications and shipping details.';
+  }
+
+  // Close the quote sidebar
+  closeQuote();
+
+  // Scroll to the inquiry form
+  var inquirySection = document.getElementById('inquiry');
+  if (inquirySection) {
+    inquirySection.scrollIntoView({behavior:'smooth',block:'start'});
+  }
+
+  // Highlight the form to draw attention
+  var formWrap = document.querySelector('.inquiry-form-wrap');
+  if (formWrap) {
+    formWrap.style.transition = 'box-shadow 0.4s';
+    formWrap.style.boxShadow = '0 0 0 3px #ff7a00';
+    setTimeout(function(){ formWrap.style.boxShadow = ''; }, 2500);
+  }
+});
+
 // ===== SCROLL TO PRODUCT SECTION =====
 window.scrollToProduct = function(id){
   closeQuote();
