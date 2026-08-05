@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css?v=20260805h">
+    <link rel="stylesheet" href="css/style.css?v=20260805n">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23ff7a00'/><text x='50' y='72' font-size='60' font-weight='900' text-anchor='middle' fill='white' font-family='Arial'>A</text></svg>">
 </head>
 <body>
@@ -211,7 +211,7 @@
             <div class="solutions-grid">
                 <div class="solution-card reveal">
                     <div class="solution-img">
-                        <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg"><rect x="30" y="130" width="240" height="35" rx="3" fill="#334155"/><rect x="55" y="60" width="190" height="75" rx="5" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1"/><path d="M75 60 L90 25 L210 25 L225 60 Z" fill="url(#s1g)"/><defs><linearGradient id="s1g"><stop offset="0%" stop-color="#ff7a00"/><stop offset="100%" stop-color="#cc5a00"/></linearGradient></defs></svg>
+                        <img src="assets/solution-brick.webp" alt="Brick Making Production Line" loading="lazy">
                     </div>
                     <div class="solution-info">
                         <h3 data-i18n="solutions.c1.title">Brick Making Line</h3>
@@ -221,7 +221,7 @@
                 </div>
                 <div class="solution-card reveal">
                     <div class="solution-img">
-                        <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg"><rect x="30" y="130" width="240" height="35" rx="3" fill="#334155"/><rect x="70" y="70" width="160" height="65" rx="5" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1"/><circle cx="150" cy="102" r="24" fill="url(#s2g)"/><defs><linearGradient id="s2g"><stop offset="0%" stop-color="#ff7a00"/><stop offset="100%" stop-color="#cc5a00"/></linearGradient></defs></svg>
+                        <img src="assets/solution-wood.webp" alt="Wood Processing Line" loading="lazy">
                     </div>
                     <div class="solution-info">
                         <h3 data-i18n="solutions.c2.title">Wood Processing</h3>
@@ -231,7 +231,7 @@
                 </div>
                 <div class="solution-card reveal">
                     <div class="solution-img">
-                        <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg"><rect x="30" y="130" width="240" height="35" rx="3" fill="#334155"/><rect x="70" y="70" width="160" height="65" rx="5" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1"/><circle cx="120" cy="102" r="20" fill="url(#s3g)"/><circle cx="180" cy="102" r="20" fill="url(#s3g)"/><defs><linearGradient id="s3g"><stop offset="0%" stop-color="#ff7a00"/><stop offset="100%" stop-color="#cc5a00"/></linearGradient></defs></svg>
+                        <img src="assets/solution-metal.webp" alt="Metal Recycling Line" loading="lazy">
                     </div>
                     <div class="solution-info">
                         <h3 data-i18n="solutions.c3.title">Metal Recycling</h3>
@@ -241,7 +241,7 @@
                 </div>
                 <div class="solution-card reveal">
                     <div class="solution-img">
-                        <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg"><rect x="30" y="130" width="240" height="35" rx="3" fill="#334155"/><rect x="60" y="65" width="180" height="70" rx="5" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1"/><rect x="80" y="75" width="60" height="50" rx="3" fill="#ff7a00" opacity="0.3"/><rect x="160" y="75" width="60" height="50" rx="3" fill="#ff7a00" opacity="0.3"/></svg>
+                        <img src="assets/solution-custom.webp" alt="Custom Engineering OEM ODM" loading="lazy">
                     </div>
                     <div class="solution-info">
                         <h3 data-i18n="solutions.c4.title">Custom Engineering</h3>
@@ -258,7 +258,15 @@
         <div class="container">
             <!-- Brick -->
             <div class="pd-row reveal">
-                <div class="pd-visual"><img src="assets/product-brick.webp" alt="Concrete Block Making Machine" class="pd-img" loading="lazy"></div>
+                <div class="pd-visual">
+                    <img src="assets/product-brick.webp" alt="Concrete Block Making Machine" class="pd-img" id="pd-brick-img" loading="lazy">
+                    <div class="pd-gallery">
+                        <img src="assets/product-brick.webp" alt="Concrete Block Making Machine" onclick="swapBrickImage(this.src)" loading="lazy">
+                        <img src="assets/product-brick-2.webp" alt="Automatic Block Production Line" onclick="swapBrickImage(this.src)" loading="lazy">
+                        <img src="assets/product-brick-3.webp" alt="Semi-Automatic Brick Machine" onclick="swapBrickImage(this.src)" loading="lazy">
+                        <img src="assets/product-brick-4.webp" alt="Hydraulic Block Machine" onclick="swapBrickImage(this.src)" loading="lazy">
+                    </div>
+                </div>
                 <div class="pd-content">
                     <span class="pd-tag" data-i18n="detail.brick.tag">High Capacity</span>
                     <h2 class="pd-title" data-i18n="detail.brick.title">Concrete Block Making Series</h2>
@@ -273,7 +281,15 @@
             </div>
             <!-- Wood -->
             <div class="pd-row pd-row-reverse reveal">
-                <div class="pd-visual"><img src="assets/product-wood.webp" alt="Wood Chipper Crusher Machine" class="pd-img" loading="lazy"></div>
+                <div class="pd-visual">
+                    <img src="assets/product-wood.webp" alt="Wood Chipper Crusher Machine" class="pd-img" id="pd-wood-img" loading="lazy">
+                    <div class="pd-gallery">
+                        <img src="assets/product-wood.webp" alt="Wood Chipper Crusher" onclick="swapWoodImage(this.src)" loading="lazy">
+                        <img src="assets/product-wood-2.webp" alt="Wood Crusher Front View" onclick="swapWoodImage(this.src)" loading="lazy">
+                        <img src="assets/product-wood-3.webp" alt="Wood Crusher Outdoor" onclick="swapWoodImage(this.src)" loading="lazy">
+                        <img src="assets/product-wood-4.webp" alt="Wood Crusher Conveyor Detail" onclick="swapWoodImage(this.src)" loading="lazy">
+                    </div>
+                </div>
                 <div class="pd-content">
                     <span class="pd-tag" data-i18n="detail.wood.tag">Heavy-Duty</span>
                     <h2 class="pd-title" data-i18n="detail.wood.title">Wood Chipper & Crusher Series</h2>
@@ -288,7 +304,15 @@
             </div>
             <!-- Metal -->
             <div class="pd-row reveal">
-                <div class="pd-visual"><img src="assets/product-metal.webp" alt="Metal Shredder Machine" class="pd-img" loading="lazy"></div>
+                <div class="pd-visual">
+                    <img src="assets/product-metal.webp" alt="Metal Shredder Machine" class="pd-img" id="pd-metal-img" loading="lazy">
+                    <div class="pd-gallery">
+                        <img src="assets/product-metal.webp" alt="Metal Shredder" onclick="swapMetalImage(this.src)" loading="lazy">
+                        <img src="assets/product-metal-2.webp" alt="Heavy Duty Metal Shredder" onclick="swapMetalImage(this.src)" loading="lazy">
+                        <img src="assets/product-metal-3.webp" alt="Industrial Metal Shredder" onclick="swapMetalImage(this.src)" loading="lazy">
+                        <img src="assets/product-metal-gearbox.webp" alt="Shredder Gearbox" onclick="swapMetalImage(this.src)" loading="lazy">
+                    </div>
+                </div>
                 <div class="pd-content">
                     <span class="pd-tag" data-i18n="detail.metal.tag">Recycling</span>
                     <h2 class="pd-title" data-i18n="detail.metal.title">Metal Shredder Series</h2>
@@ -321,7 +345,7 @@
                 <div class="product-grid">
                     <div class="product-card reveal">
                         <div class="product-img">
-                            <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg"><rect x="40" y="140" width="220" height="30" rx="3" fill="#334155"/><rect x="60" y="70" width="180" height="75" rx="5" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1"/><path d="M80 70 L95 30 L205 30 L220 70 Z" fill="url(#pc1)"/><defs><linearGradient id="pc1"><stop offset="0%" stop-color="#ff7a00"/><stop offset="100%" stop-color="#cc5a00"/></linearGradient></defs><rect x="50" y="145" width="40" height="18" rx="2" fill="#d97706"/><rect x="100" y="145" width="40" height="18" rx="2" fill="#d97706"/><rect x="150" y="145" width="40" height="18" rx="2" fill="#d97706"/><rect x="200" y="145" width="40" height="18" rx="2" fill="#d97706"/></svg>
+                            <img src="assets/cat-brick-1.webp" alt="Fully Automatic Block Machine QT4-25" loading="lazy">
                             <span class="product-ribbon" data-i18n="products.ribbon.hot">Hot</span>
                         </div>
                         <div class="product-info">
@@ -332,7 +356,7 @@
                     </div>
                     <div class="product-card reveal">
                         <div class="product-img">
-                            <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg"><rect x="30" y="135" width="240" height="32" rx="3" fill="#334155"/><rect x="65" y="80" width="170" height="60" rx="5" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1"/><path d="M80 80 L65 40 L155 40 L140 80 Z" fill="url(#pc2)"/><defs><linearGradient id="pc2"><stop offset="0%" stop-color="#ff7a00"/><stop offset="100%" stop-color="#cc5a00"/></linearGradient></defs><rect x="200" y="90" width="25" height="50" rx="3" fill="#1e293b"/></svg>
+                            <img src="assets/cat-brick-2.webp" alt="Semi-Automatic Brick Machine QT4-35" loading="lazy">
                             <span class="product-ribbon" data-i18n="products.ribbon.hot">Hot</span>
                         </div>
                         <div class="product-info">
@@ -343,7 +367,7 @@
                     </div>
                     <div class="product-card reveal">
                         <div class="product-img">
-                            <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg"><rect x="35" y="135" width="230" height="35" rx="3" fill="#334155"/><rect x="60" y="65" width="180" height="75" rx="5" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1"/><path d="M75 65 L60 25 L170 25 L155 65 Z" fill="url(#pc3)"/><defs><linearGradient id="pc3"><stop offset="0%" stop-color="#ff7a00"/><stop offset="100%" stop-color="#cc5a00"/></linearGradient></defs><rect x="50" y="142" width="45" height="20" rx="2" fill="#d97706"/><rect x="105" y="142" width="45" height="20" rx="2" fill="#d97706"/><rect x="160" y="142" width="45" height="20" rx="2" fill="#d97706"/></svg>
+                            <img src="assets/cat-brick-3.webp" alt="Hydraulic Block Machine QT10-15" loading="lazy">
                             <span class="product-ribbon" data-i18n="products.ribbon.new">New</span>
                         </div>
                         <div class="product-info">
@@ -359,7 +383,7 @@
                 <div class="product-grid">
                     <div class="product-card reveal">
                         <div class="product-img">
-                            <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg"><rect x="30" y="135" width="240" height="35" rx="3" fill="#334155"/><rect x="70" y="80" width="160" height="60" rx="5" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1"/><circle cx="150" cy="110" r="22" fill="url(#pw1)"/><defs><linearGradient id="pw1"><stop offset="0%" stop-color="#ff7a00"/><stop offset="100%" stop-color="#cc5a00"/></linearGradient></defs></svg>
+                            <img src="assets/cat-wood-1.webp" alt="Drum Wood Chipper WC-800" loading="lazy">
                             <span class="product-ribbon" data-i18n="products.ribbon.hot">Hot</span>
                         </div>
                         <div class="product-info">
@@ -370,7 +394,7 @@
                     </div>
                     <div class="product-card reveal">
                         <div class="product-img">
-                            <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg"><rect x="30" y="140" width="240" height="30" rx="3" fill="#334155"/><rect x="60" y="85" width="180" height="60" rx="5" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1"/><path d="M120 85 L135 45 L185 45 L170 85 Z" fill="url(#pw2)"/><defs><linearGradient id="pw2"><stop offset="0%" stop-color="#ff7a00"/><stop offset="100%" stop-color="#cc5a00"/></linearGradient></defs><circle cx="150" cy="115" r="20" fill="#64748b"/></svg>
+                            <img src="assets/cat-wood-2.webp" alt="Disc Wood Chipper DC-600" loading="lazy">
                         </div>
                         <div class="product-info">
                             <span class="product-code">#AUK-DC600</span>
@@ -380,7 +404,7 @@
                     </div>
                     <div class="product-card reveal">
                         <div class="product-img">
-                            <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg"><rect x="30" y="140" width="240" height="30" rx="3" fill="#334155"/><rect x="60" y="80" width="180" height="65" rx="5" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1"/><path d="M80 80 L70 45 L160 45 L150 80 Z" fill="url(#pw3)"/><defs><linearGradient id="pw3"><stop offset="0%" stop-color="#ff7a00"/><stop offset="100%" stop-color="#cc5a00"/></linearGradient></defs><rect x="90" y="95" width="120" height="40" rx="3" fill="#64748b"/></svg>
+                            <img src="assets/cat-wood-3.webp" alt="Wood Crusher / Hammer Mill CR-500" loading="lazy">
                         </div>
                         <div class="product-info">
                             <span class="product-code">#AUK-CR500</span>
@@ -395,7 +419,7 @@
                 <div class="product-grid">
                     <div class="product-card reveal">
                         <div class="product-img">
-                            <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg"><rect x="30" y="135" width="240" height="35" rx="3" fill="#334155"/><rect x="70" y="85" width="160" height="55" rx="5" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1"/><circle cx="120" cy="112" r="18" fill="url(#pm1)"/><circle cx="180" cy="112" r="18" fill="url(#pm1)"/><defs><linearGradient id="pm1"><stop offset="0%" stop-color="#ff7a00"/><stop offset="100%" stop-color="#cc5a00"/></linearGradient></defs></svg>
+                            <img src="assets/cat-metal-1.webp" alt="Double Shaft Shredder SS-800" loading="lazy">
                             <span class="product-ribbon" data-i18n="products.ribbon.new">New</span>
                         </div>
                         <div class="product-info">
@@ -406,7 +430,7 @@
                     </div>
                     <div class="product-card reveal">
                         <div class="product-img">
-                            <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg"><rect x="30" y="130" width="240" height="38" rx="3" fill="#334155"/><rect x="60" y="75" width="180" height="60" rx="5" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1"/><path d="M80 75 L70 40 L160 40 L150 75 Z" fill="url(#pm2)"/><defs><linearGradient id="pm2"><stop offset="0%" stop-color="#ff7a00"/><stop offset="100%" stop-color="#cc5a00"/></linearGradient></defs><rect x="210" y="85" width="25" height="50" rx="3" fill="#1e293b"/></svg>
+                            <img src="assets/cat-metal-2.webp" alt="Heavy Duty Shredder SS-1000" loading="lazy">
                         </div>
                         <div class="product-info">
                             <span class="product-code">#AUK-SS1000</span>
@@ -416,7 +440,7 @@
                     </div>
                     <div class="product-card reveal">
                         <div class="product-img">
-                            <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg"><rect x="40" y="140" width="220" height="32" rx="3" fill="#334155"/><rect x="60" y="85" width="180" height="60" rx="5" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1"/><path d="M80 85 L70 45 L160 45 L150 85 Z" fill="url(#pm3)"/><defs><linearGradient id="pm3"><stop offset="0%" stop-color="#ff7a00"/><stop offset="100%" stop-color="#cc5a00"/></linearGradient></defs><circle cx="115" cy="115" r="15" fill="#64748b"/><circle cx="175" cy="115" r="15" fill="#64748b"/></svg>
+                            <img src="assets/cat-metal-3.webp" alt="Scrap Metal Crusher SS-600" loading="lazy">
                         </div>
                         <div class="product-info">
                             <span class="product-code">#AUK-SS600</span>
@@ -702,6 +726,6 @@
         </div>
     </div>
 
-    <script src="js/main.js?v=20260805h"></script>
+    <script src="js/main.js?v=20260805n"></script>
 </body>
 </html>
