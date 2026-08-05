@@ -484,6 +484,20 @@ window.scrollToProduct = function(id){
   });
 };
 
+// ===== PRODUCT IMAGE GALLERIES =====
+window.swapMetalImage = function(src){
+  var main = document.getElementById('pd-metal-img');
+  if (main) main.src = src;
+};
+window.swapBrickImage = function(src){
+  var main = document.getElementById('pd-brick-img');
+  if (main) main.src = src;
+};
+window.swapWoodImage = function(src){
+  var main = document.getElementById('pd-wood-img');
+  if (main) main.src = src;
+};
+
 // ===== INQUIRY FORM =====
 var inquiryForm = document.getElementById('inquiryForm');
 if (inquiryForm) {
