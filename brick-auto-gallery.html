@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-i18n="pt_gallery">型号图集 · Auken Machinery</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="subpage">
+<header class="sub-head">
+  <a href="brick-auto.html" class="sub-back" id="subBack" data-i18n="back">← 返回</a>
+  <span class="sub-brand">AUKEN</span>
+</header>
+
+<main class="about gallery">
+  <section class="block">
+    <h2 class="block-title" id="gTitle">型号图集</h2>
+    <p class="block-desc" id="gDesc"></p>
+    <div class="gallery-grid" id="gGrid"></div>
+  </section>
+
+  <footer class="sub-foot">
+    <span>Zhengzhou Auken Machinery Equipment Co., Ltd.</span>
+  </footer>
+</main>
+<script src="subi18n.js"></script>
+<!-- <<<AUKEN_GALLERY_START>>> -->
+<script>
+  var G = {
+    "qt428": {
+      zh: { name: "QT4-28", desc: "QT4-28 实拍图集" },
+      en: { name: "QT4-28", desc: "QT4-28 photo gallery" },
+      fr: { name: "QT4-28", desc: "Galerie photos QT4-28" },
+      ar: { name: "QT4-28", desc: "معرض صور QT4-28" },
+      imgs: ["QT4-28/QT4-28-1.webp"]
+    },
+    "qt425": {
+      zh: { name: "QT4-25", desc: "QT4-25 实拍图集" },
+      en: { name: "QT4-25", desc: "QT4-25 photo gallery" },
+      fr: { name: "QT4-25", desc: "Galerie photos QT4-25" },
+      ar: { name: "QT4-25", desc: "معرض صور QT4-25" },
+      imgs: ["QT4-25/QT4-25-1.webp"]
+    }
+  };
+  var lang = (function(){ try { return sessionStorage.getItem('auken_lang'); } catch(e){ return null; } })() || document.documentElement.lang || 'zh';
+  var m = (location.search.match(/[?&]m=([^&]+)/) || [,''])[1];
+  var d = G[m];
+  var gTitle = document.getElementById('gTitle');
+  var gDesc = document.getElementById('gDesc');
+  var grid = document.getElementById('gGrid');
+  if (!d) {
+    gTitle.textContent = '暂无图集';
+    gDesc.textContent = '该型号暂未上传图片，敬请期待。';
+  } else {
+    gTitle.textContent = d[lang].name;
+    gDesc.textContent = d[lang].desc;
+    if (!d.imgs || !d.imgs.length) {
+      var empty = document.createElement('p');
+      empty.className = 'gallery-empty';
+      empty.textContent = '暂无图片';
+      grid.appendChild(empty);
+    } else {
+      d.imgs.forEach(function (src) {
+        var fig = document.createElement('figure');
+        fig.className = 'gallery-item';
+        var im = document.createElement('img');
+        im.src = 'img/' + src; im.alt = d[lang].name; im.loading = 'lazy';
+        fig.appendChild(im);
+        grid.appendChild(fig);
+      });
+    }
+  }
+  (function () {
+    var back = document.getElementById('subBack');
+    if (!back) return;
+    var ref = document.referrer || '';
+    var sameSite = ref.indexOf(location.protocol + '//' + location.host) === 0;
+    back.addEventListener('click', function (e) {
+      if (sameSite && history.length > 1) { e.preventDefault(); history.back(); }
+    });
+  })();
+</script>
+    <!-- <<<AUKEN_GALLERY_END>>> -->
+
+<script src="cart.js"></script>
+</body>
+</html>
