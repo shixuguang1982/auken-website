@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-i18n="pt_inquiry">提交询盘 · Auken Machinery</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="subpage">
+<header class="sub-head">
+  <a href="brick-manual.html" class="sub-back" data-i18n="back">← 返回</a>
+  <span class="sub-brand">AUKEN</span>
+</header>
+
+<main class="about inquiry">
+  <section class="block">
+    <h2 class="block-title" id="iqTitle">提交询盘</h2>
+    <p class="block-desc" id="iqIntro"></p>
+
+    <form class="iq-form" id="iqForm"
+          action="https://formsubmit.co/sales@aukenmachinery.com"
+          method="POST" novalidate>
+
+      <!-- FormSubmit 配置（与截图邮件格式一致） -->
+      <input type="hidden" name="_subject" id="iqSubject" value="New Inquiry from Auken Website">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="https://aukenmachinery.com/#thank-you">
+      <!-- 反垃圾蜜罐（FormSubmit 标准做法） -->
+      <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+
+      <!-- 姓名（选填） -->
+      <label class="iq-label" id="iqNameLabel"></label>
+      <input class="iq-input" id="iqName" name="name" type="text" autocomplete="name">
+
+      <!-- WhatsApp 号 -->
+      <label class="iq-label" id="iqWaLabel"></label>
+      <input class="iq-input" id="iqWa" name="whatsapp" type="text" inputmode="tel" autocomplete="tel" placeholder="+86 1xx xxxx xxxx">
+
+      <!-- 邮箱 -->
+      <label class="iq-label" id="iqMailLabel"></label>
+      <input class="iq-input" id="iqMail" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@company.com">
+
+      <!-- 行内错误提示（当 WhatsApp 和邮箱都没填时显示） -->
+      <p class="iq-error" id="iqError" hidden></p>
+
+      <!-- 产品清单（视觉展示 + 自动嵌入下面的 message） -->
+      <label class="iq-label" id="iqListLabel"></label>
+      <div class="iq-products" id="iqProducts"></div>
+
+      <!-- 询盘内容（产品清单自动预填，可修改） -->
+      <label class="iq-label" id="iqContentLabel"></label>
+      <textarea class="iq-textarea" id="iqContent" name="message" rows="6"></textarea>
+
+      <!-- 两个提交入口并排：邮件询盘 / WhatsApp 沟通 -->
+      <div class="iq-actions">
+        <button class="iq-submit" id="iqSubmit" type="submit"></button>
+
+        <!-- WhatsApp 直接沟通：点击后跳转到 WhatsApp 并自动预填询盘内容 -->
+        <a class="iq-wa-btn" id="iqWaBtn" href="#" target="_blank" rel="noopener"></a>
+      </div>
+
+      <p class="iq-note" id="iqNote"></p>
+    </form>
+
+    <!-- 提交成功后的内嵌视图（默认隐藏，AJAX 成功后替换表单显示） -->
+    <div class="iq-success" id="iqSuccess" hidden>
+      <div class="iq-success-icon">✓</div>
+      <h3 class="iq-success-title" id="iqSuccessTitle"></h3>
+      <p class="iq-success-desc" id="iqSuccessDesc"></p>
+      <a class="iq-success-btn" href="index.html" id="iqSuccessHome"></a>
+      <a class="iq-success-link" href="brick-manual.html" id="iqSuccessMore"></a>
+    </div>
+  </section>
+
+  <footer class="sub-foot">
+    <span>Zhengzhou Auken Machinery Equipment Co., Ltd.</span>
+  </footer>
+</main>
+
+<script>
+  /* 与 main.js / cart.js 一致的 i18n */
+  var I18N = {
+    zh: {
+      title: '提交询盘',
+      intro: '请填入您的 WhatsApp 号或邮箱，我们会立即收到您的询盘邮件，并及时与您联系。',
+      name: '您的姓名（选填）', wa: 'WhatsApp 号码', mail: '邮箱',
+      list: '您的询盘产品', content: '填写您的定制要求',
+      send: '邮件询盘', note: '任选其一：点「邮件询盘」把询盘发至 sales@aukenmachinery.com；点「WhatsApp」则跳转 WhatsApp 并预填好内容，直接发送即可。我们会第一时间回复您。',
+      empty: '购物车为空，请先在产品页添加设备。',
+      placeholderName: '如：张先生',
+      placeholderWa: '+86 1xx xxxx xxxx', placeholderMail: 'you@company.com',
+      warnBoth: '请至少填写 WhatsApp 号或邮箱其中一个，提交后才能收到我们的回复。',
+      sending: '发送中…',
+      subjectTpl: 'New Inquiry from Auken Website',
+      prefHeadZh: '您好，我们对以下设备感兴趣，请提供报价：',
+      prefFootZh: '\n\n期待您的回复，谢谢！',
+      successTitle: '询盘已发送',
+      successDesc: '感谢您的询盘！我们已收到您的信息，会尽快通过您留下的 WhatsApp 或邮箱与您联系。',
+      successHome: '返回首页',
+      successMore: '继续浏览产品',
+      waBtn: 'WhatsApp',
+      contactLabel: '我的联系方式'
+    },
+    en: {
+      title: 'Submit Inquiry',
+      intro: 'Please enter your WhatsApp number or email. We will receive your inquiry email immediately and contact you promptly.',
+      name: 'Your Name (optional)', wa: 'WhatsApp Number', mail: 'Email',
+      list: 'Your Inquiry Products', content: 'Inquiry Details (editable)',
+      send: 'Email Inquiry', note: 'Either way works: "Email Inquiry" sends to sales@aukenmachinery.com; "WhatsApp" opens WhatsApp with your message pre-filled — just hit send. We will reply promptly.',
+      empty: 'Your cart is empty. Please add machines from the product page first.',
+      placeholderName: 'e.g. Mr. Smith',
+      placeholderWa: '+86 1xx xxxx xxxx', placeholderMail: 'you@company.com',
+      warnBoth: 'Please provide at least a WhatsApp number or an email so we can reply.',
+      sending: 'Sending…',
+      subjectTpl: 'New Inquiry from Auken Website',
+      prefHeadZh: 'Hello, I am interested in the following machines, please quote:',
+      prefFootZh: '\n\nLooking forward to your reply. Thank you!',
+      successTitle: 'Inquiry Sent',
+      successDesc: 'Thank you for your inquiry! We have received your message and will get back to you via your WhatsApp or email shortly.',
+      successHome: 'Back to Home',
+      successMore: 'Browse More Products',
+      waBtn: 'WhatsApp',
+      contactLabel: 'My Contact'
+    },
+    fr: {
+      title: 'Envoyer la demande',
+      intro: 'Veuillez indiquer votre numéro WhatsApp ou votre email. Nous recevrons votre demande immédiatement et vous contacterons rapidement.',
+      name: 'Votre nom (optionnel)', wa: 'Numéro WhatsApp', mail: 'Email',
+      list: 'Vos produits', content: 'Détails (modifiable)',
+      send: 'Email', note: 'Au choix : « Email » envoie la demande à sales@aukenmachinery.com ; « WhatsApp » ouvre WhatsApp avec le message pré-rempli, prêt à envoyer. Nous répondrons rapidement.',
+      empty: 'Panier vide. Ajoutez des machines depuis la page produit.',
+      placeholderName: 'ex. M. Dupont',
+      placeholderWa: '+86 1xx xxxx xxxx', placeholderMail: 'vous@societe.com',
+      warnBoth: 'Fournissez au moins un numéro WhatsApp ou un email pour que nous puissions vous répondre.',
+      sending: 'Envoi…',
+      subjectTpl: 'New Inquiry from Auken Website',
+      prefHeadZh: 'Bonjour, je suis intéressé par les machines suivantes, merci de m\'envoyer un devis :',
+      prefFootZh: '\n\nDans l\'attente de votre réponse. Merci !',
+      successTitle: 'Demande envoyée',
+      successDesc: 'Merci pour votre demande ! Nous l\'avons bien reçue et reviendrons vers vous rapidement via votre WhatsApp ou votre email.',
+      successHome: 'Retour à l\'accueil',
+      successMore: 'Voir d\'autres produits',
+      waBtn: 'WhatsApp',
+      contactLabel: 'Mon contact'
+    },
+    ar: {
+      title: 'إرسال الاستفسار',
+      intro: 'يرجى إدخال رقم WhatsApp أو البريد الإلكتروني. سنستلم رسالتك فورًا وسنتواصل معك بسرعة.',
+      name: 'اسمك (اختياري)', wa: 'رقم WhatsApp', mail: 'البريد الإلكتروني',
+      list: 'منتجاتك', content: 'تفاصيل الاستفسار (قابلة للتعديل)',
+      send: 'البريد الإلكتروني', note: 'أيًا تختار: « البريد الإلكتروني » يرسل الاستفسار إلى sales@aukenmachinery.com؛ « WhatsApp » يفتح التطبيق مع الرسالة جاهزة للإرسال. سنرد في أقرب وقت.',
+      empty: 'سلة فارغة. أضف الآلات من صفحة المنتج أولاً.',
+      placeholderName: 'مثال: السيد أحمد',
+      placeholderWa: '+86 1xx xxxx xxxx', placeholderMail: 'you@company.com',
+      warnBoth: 'يرجى تقديم رقم WhatsApp أو بريد إلكتروني على الأقل لنتمكن من الرد.',
+      sending: 'جارٍ الإرسال…',
+      subjectTpl: 'New Inquiry from Auken Website',
+      prefHeadZh: 'مرحبًا، أنا مهتم بالآلات التالية، يرجى إرسال عرض السعر:',
+      prefFootZh: '\n\nفي انتظار ردكم. شكرًا!',
+      successTitle: 'تم إرسال الاستفسار',
+      successDesc: 'شكرًا لاستفسارك! لقد استلمنا رسالتك وسنتواصل معك قريبًا عبر WhatsApp أو البريد الإلكتروني.',
+      successHome: 'العودة إلى الرئيسية',
+      successMore: 'تصفح منتجات أخرى',
+      waBtn: 'WhatsApp',
+      contactLabel: 'معلومات التواصل'
+    }
+  };
+
+  function lang() {
+    var l = null;
+    try { l = sessionStorage.getItem('auken_lang'); } catch (e) {}
+    if (!l || !I18N[l]) l = document.documentElement.lang;
+    return I18N[l] ? l : 'zh';
+  }
+
+  function getCart() {
+    try { return JSON.parse(localStorage.getItem('auken_inquiry_cart') || '[]'); } catch (e) { return []; }
+  }
+
+  var arr = getCart();
+  var t = I18N[lang()];
+
+  // 文案填充
+  document.getElementById('iqTitle').textContent = t.title;
+  document.getElementById('iqIntro').textContent = t.intro;
+  document.getElementById('iqNameLabel').textContent = t.name;
+  document.getElementById('iqWaLabel').textContent = t.wa;
+  document.getElementById('iqMailLabel').textContent = t.mail;
+  document.getElementById('iqListLabel').textContent = t.list;
+  document.getElementById('iqContentLabel').textContent = t.content;
+  document.getElementById('iqSubmit').textContent = t.send;
+  document.getElementById('iqNote').textContent = t.note;
+  document.getElementById('iqName').placeholder = t.placeholderName;
+  document.getElementById('iqWa').placeholder = t.placeholderWa;
+  document.getElementById('iqMail').placeholder = t.placeholderMail;
+  document.getElementById('iqSubject').value = t.subjectTpl;
+  document.getElementById('iqWaBtn').textContent = t.waBtn;
+
+  // 产品清单（视觉展示）
+  var box = document.getElementById('iqProducts');
+  if (!arr.length) {
+    box.innerHTML = '<div class="iq-empty">' + t.empty + '</div>';
+  } else {
+    arr.forEach(function (it) {
+      var d = document.createElement('div');
+      d.className = 'iq-product';
+      d.textContent = '- ' + it.name + (it.tag ? ' (' + it.tag + ')' : '') + (it.price ? '  EXW ' + it.price : '');
+      box.appendChild(d);
+    });
+  }
+
+  // 询盘内容预填（产品清单 + 落款）
+  var lines = arr.map(function (it) {
+    return '- ' + it.name + (it.tag ? ' (' + it.tag + ')' : '') + (it.price ? '  EXW ' + it.price : '');
+  });
+  var prefill = t.prefHeadZh + '\n' +
+    (lines.length ? lines.join('\n') : '(no products selected)') + t.prefFootZh;
+  document.getElementById('iqContent').value = prefill;
+
+  // —— 表单校验 + 提交 ——
+  var form = document.getElementById('iqForm');
+  var iqWa = document.getElementById('iqWa');
+  var iqMail = document.getElementById('iqMail');
+  var iqError = document.getElementById('iqError');
+  var submitBtn = document.getElementById('iqSubmit');
+
+  function clearError() {
+    iqWa.classList.remove('iq-field--error');
+    iqMail.classList.remove('iq-field--error');
+    iqError.hidden = true;
+  }
+  function showError(msg) {
+    iqWa.classList.add('iq-field--error');
+    iqMail.classList.add('iq-field--error');
+    iqError.textContent = msg;
+    iqError.hidden = false;
+    // 滚到第一个错误字段
+    try { iqWa.scrollIntoView({ block: 'center', behavior: 'smooth' }); } catch (e) {}
+    try { iqWa.focus(); } catch (e) {}
+  }
+
+  // 任一字段开始输入，立刻清除错误状态
+  [iqWa, iqMail].forEach(function (el) {
+    el.addEventListener('input', clearError);
+  });
+
+  // —— WhatsApp 直接沟通：把询盘内容预填进 wa.me 链接 ——
+  // 号码取自公司 WhatsApp：+86 151 3620 9578 → wa.me 仅需数字（去 + 和空格）
+  var WA_NUMBER = '8615136209578';
+  var waBtn = document.getElementById('iqWaBtn');
+
+  function buildWaText() {
+    // 以可编辑的询盘内容为准（客户可先修改 textarea）
+    var text = (document.getElementById('iqContent').value || '').trim();
+    var contact = [];
+    var nm = document.getElementById('iqName').value.trim();
+    var wv = document.getElementById('iqWa').value.trim();
+    var ml = document.getElementById('iqMail').value.trim();
+    if (nm) contact.push('Name / 姓名: ' + nm);
+    if (wv) contact.push('WhatsApp: ' + wv);
+    if (ml) contact.push('Email: ' + ml);
+    if (contact.length) {
+      text += '\n\n--- ' + t.contactLabel + ' ---\n' + contact.join('\n');
+    }
+    return text;
+  }
+
+  waBtn.addEventListener('click', function (e) {
+    e.preventDefault();
+    var text = buildWaText();
+    var url = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(text);
+    window.open(url, '_blank', 'noopener');
+  });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    // 防止 file:// 协议直接打开（FormSubmit 不支持）
+    if (location.protocol === 'file:') {
+      showError('当前为本地文件方式打开（file://），FormSubmit 不支持。请通过 http://127.0.0.1:8080/inquiry.html 访问。');
+      return;
+    }
+
+    var wa = iqWa.value.trim();
+    var mail = iqMail.value.trim();
+
+    // 校验：WhatsApp 或邮箱必须填一个
+    if (!wa && !mail) {
+      showError(t.warnBoth);
+      return;
+    }
+
+    // 校验通过：清错误状态、锁按钮、用 fetch 异步提交到 FormSubmit，留在本页显示成功
+    clearError();
+    try { localStorage.removeItem('auken_inquiry_cart'); } catch (e2) {}
+    submitBtn.disabled = true;
+    submitBtn.textContent = t.sending;
+
+    var fd = new FormData(form);
+    fetch('https://formsubmit.co/ajax/sales@aukenmachinery.com', {
+      method: 'POST',
+      body: fd,
+      headers: { 'Accept': 'application/json' }
+    })
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (data && (data.success === 'true' || data.success === true)) {
+          showSuccess();
+        } else {
+          // FormSubmit 返回非 success：兜底原生提交（会去 FormSubmit 默认 Thanks 页）
+          form.submit();
+        }
+      })
+      .catch(function () {
+        // 网络/CORS 异常：兜底原生提交
+        form.submit();
+      });
+  });
+
+  // —— 成功视图 ——
+  var successEl = document.getElementById('iqSuccess');
+  function showSuccess() {
+    document.getElementById('iqSuccessTitle').textContent = t.successTitle;
+    document.getElementById('iqSuccessDesc').textContent = t.successDesc;
+    document.getElementById('iqSuccessHome').textContent = t.successHome;
+    document.getElementById('iqSuccessMore').textContent = t.successMore;
+    form.hidden = true;
+    successEl.hidden = false;
+    try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch (e) { window.scrollTo(0, 0); }
+  }
+</script>
+<script src="cart.js"></script>
+<script src="subi18n.js"></script>
+</body>
+</html>
