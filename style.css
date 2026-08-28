@@ -333,7 +333,10 @@ body.entered{ overflow:auto; }
 @media (max-width:720px){
   .stats{ grid-template-columns:repeat(2,1fr); }
   .grid,.grid.two{ grid-template-columns:1fr; }
-  .hero-img{ height:260px; }
+  .hero-img{ height:380px; }
+  .hero-text{ margin-bottom:32px; padding:0 18px; }
+  .hero-text h1{ font-size:30px; }
+  .hero-text p{ font-size:15px; }
   .cat-name{ font-size:18px; }
   .cat-price{ font-size:13px; }
   .cat-en{ display:none; }
