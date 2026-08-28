@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-i18n="pt_support_video">操作视频 · Auken Machinery</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="subpage">
+<header class="sub-head">
+  <a href="brick-supporting.html" class="sub-back" id="subBack" data-i18n="back">← 返回</a>
+  <span class="sub-brand">AUKEN</span>
+</header>
+
+<main class="about gallery">
+  <section class="block">
+    <h2 class="block-title" id="vTitle">操作视频</h2>
+    <p class="block-desc" id="vDesc"></p>
+    <div class="video-grid" id="vGrid"></div>
+  </section>
+
+  <footer class="sub-foot">
+    <span>Zhengzhou Auken Machinery Equipment Co., Ltd.</span>
+  </footer>
+</main>
+<script src="subi18n.js"></script>
+<!-- <<<AUKEN_VIDEO_START>>> -->
+<script>
+  var V = {
+    "batching": {
+      zh: { name: "配料机", desc: "配料机 操作视频" },
+      en: { name: "Batching Machine", desc: "Batching Machine operation video" },
+      fr: { name: "Batching Machine", desc: "Vidéo Batching Machine" },
+      ar: { name: "Batching Machine", desc: "فيديو تشغيل Batching Machine" },
+      vids: []
+    },
+    "mixer": {
+      zh: { name: "强制搅拌机", desc: "强制搅拌机 操作视频" },
+      en: { name: "Forced Mixer", desc: "Forced Mixer operation video" },
+      fr: { name: "Forced Mixer", desc: "Vidéo Forced Mixer" },
+      ar: { name: "Forced Mixer", desc: "فيديو تشغيل Forced Mixer" },
+      vids: []
+    },
+    "pan": {
+      zh: { name: "平口搅拌机", desc: "平口搅拌机 操作视频" },
+      en: { name: "Pan Mixer", desc: "Pan Mixer operation video" },
+      fr: { name: "Pan Mixer", desc: "Vidéo Pan Mixer" },
+      ar: { name: "Pan Mixer", desc: "فيديو تشغيل Pan Mixer" },
+      vids: []
+    },
+    "conveyor": {
+      zh: { name: "皮带输送机", desc: "皮带输送机 操作视频" },
+      en: { name: "Belt Conveyor", desc: "Belt Conveyor operation video" },
+      fr: { name: "Belt Conveyor", desc: "Vidéo Belt Conveyor" },
+      ar: { name: "Belt Conveyor", desc: "فيديو تشغيل Belt Conveyor" },
+      vids: []
+    },
+    "feeder": {
+      zh: { name: "上板机", desc: "上板机 操作视频" },
+      en: { name: "Pallet Feeder", desc: "Pallet Feeder operation video" },
+      fr: { name: "Pallet Feeder", desc: "Vidéo Pallet Feeder" },
+      ar: { name: "Pallet Feeder", desc: "فيديو تشغيل Pallet Feeder" },
+      vids: []
+    },
+    "stacker": {
+      zh: { name: "码垛机/叠板机", desc: "码垛机/叠板机 操作视频" },
+      en: { name: "Palletizer", desc: "Palletizer operation video" },
+      fr: { name: "Palletizer", desc: "Vidéo Palletizer" },
+      ar: { name: "Palletizer", desc: "فيديو تشغيل Palletizer" },
+      vids: []
+    },
+    "color": {
+      zh: { name: "彩色面料机", desc: "彩色面料机 操作视频" },
+      en: { name: "Color Face Mix", desc: "Color Face Mix operation video" },
+      fr: { name: "Color Face Mix", desc: "Vidéo Color Face Mix" },
+      ar: { name: "Color Face Mix", desc: "فيديو تشغيل Color Face Mix" },
+      vids: []
+    },
+    "pallet": {
+      zh: { name: "托板", desc: "托板 操作视频" },
+      en: { name: "Pallet", desc: "Pallet operation video" },
+      fr: { name: "Pallet", desc: "Vidéo Pallet" },
+      ar: { name: "Pallet", desc: "فيديو تشغيل Pallet" },
+      vids: []
+    },
+    "clamp": {
+      zh: { name: "夹砖器/叉车", desc: "夹砖器/叉车 操作视频" },
+      en: { name: "Brick Clamp", desc: "Brick Clamp operation video" },
+      fr: { name: "Brick Clamp", desc: "Vidéo Brick Clamp" },
+      ar: { name: "Brick Clamp", desc: "فيديو تشغيل Brick Clamp" },
+      vids: []
+    }
+  };
+  var lang = (function(){ try { return sessionStorage.getItem('auken_lang'); } catch(e){ return null; } })() || document.documentElement.lang || 'zh';
+  var m = (location.search.match(/[?&]m=([^&]+)/) || [,''])[1];
+  var d = V[m];
+  var vTitle = document.getElementById('vTitle');
+  var vDesc = document.getElementById('vDesc');
+  var grid = document.getElementById('vGrid');
+  if (!d) {
+    vTitle.textContent = '暂无视频';
+    vDesc.textContent = '该型号暂未上传试机视频，敬请期待。';
+  } else {
+    vTitle.textContent = d[lang].name;
+    vDesc.textContent = d[lang].desc;
+    if (!d.vids || !d.vids.length) {
+      var empty = document.createElement('p');
+      empty.className = 'video-empty';
+      empty.textContent = '暂无视频';
+      grid.appendChild(empty);
+    } else {
+      d.vids.forEach(function (src) {
+        var item = document.createElement('div');
+        item.className = 'video-item';
+        var v = document.createElement('video');
+        v.src = 'vid/' + src; v.controls = true; v.playsInline = true;
+        v.setAttribute('preload', 'metadata');
+        var cap = document.createElement('div');
+        cap.className = 'video-cap';
+        cap.textContent = d[lang].name + ' — ' + src.replace(/\.mp4$/, '');
+        item.appendChild(v);
+        item.appendChild(cap);
+        grid.appendChild(item);
+      });
+    }
+  }
+  (function () {
+    var back = document.getElementById('subBack');
+    if (!back) return;
+    var ref = document.referrer || '';
+    var sameSite = ref.indexOf(location.protocol + '//' + location.host) === 0;
+    back.addEventListener('click', function (e) {
+      if (sameSite && history.length > 1) { e.preventDefault(); history.back(); }
+    });
+  })();
+</script>
+    <!-- <<<AUKEN_VIDEO_END>>> -->
+
+<script src="cart.js"></script>
+</body>
+</html>
