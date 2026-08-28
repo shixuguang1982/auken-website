@@ -337,6 +337,11 @@ body.entered{ overflow:auto; }
   .cat-name{ font-size:18px; }
   .cat-price{ font-size:13px; }
   .cat-en{ display:none; }
+  .cat-link{ display:grid; grid-template-columns:26px 1fr auto; grid-template-areas:"idx body body" "idx price arrow"; align-items:center; column-gap:14px; row-gap:8px; }
+  .cat-idx{ grid-area:idx; }
+  .cat-body{ grid-area:body; min-width:0; }
+  .cat-price{ grid-area:price; }
+  .cat-arrow{ grid-area:arrow; justify-self:end; }
 }
 
 /* ===== 三级页：型号详情（图 + 参数 + 报价） ===== */
