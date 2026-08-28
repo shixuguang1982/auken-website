@@ -7,7 +7,7 @@
   var langMenu = document.getElementById('langMenu');
 
   /* ===== 多语言（问候屏 + 全站） ===== */
-                                                                                                                                              /* <<<AUKEN_I18N_START>>> */
+                                                                                                                                                    /* <<<AUKEN_I18N_START>>> */
   var I18N = {
     zh: {
       hi: '嗨，朋友',
@@ -103,7 +103,7 @@
       search_placeholder: '搜索型号、设备或页面…',
       search_empty: '未找到相关结果',
       ca_title: '客户案例',
-      ca_intro: '从尼日利亚到坦桑尼亚，奥肯设备正服务于非洲各地的砖厂与建材商。以下为客户落地案例（占位展示，上线时替换为真实图文）。',
+      ca_intro: '从尼日利亚到坦桑尼亚，奥肯设备正服务于非洲各地的砖厂与建材商。以下为客户落地案例。',
       ca1_title: '几内亚・建材加工厂',
       ca1_meta: 'QT-6-15 全自动液压生产线',
       ca1_desc: '几内亚客户配置 QT‑6‑15 全自动制砖生产线，自动送板、自动出砖，稳定产出标准空心砌块，设备适配当地砂石原料，产品主要用于商铺、民房墙体施工，生产运行稳定。',
@@ -525,7 +525,7 @@
       search_placeholder: 'Search for models, equipment, or pages...',
       search_empty: 'No matching results found',
       ca_title: 'Customer Cases',
-      ca_intro: 'From Nigeria to Tanzania, Auken equipment is serving brick plants and building material suppliers across Africa. Below are customer case studies (placeholder display – replace with actual images and text before launch).',
+      ca_intro: 'From Nigeria to Tanzania, Auken equipment is serving brick plants and building material suppliers across Africa. Below are customer case studies.',
       ca1_title: 'Nigeria · Lagos Brick Plant',
       ca1_meta: 'QT-6-15 Fully Automatic Hydraulic Production Line',
       ca1_desc: 'The customer set up a new block plant on the outskirts of Lagos, introducing the QT-6-15 fully automatic hydraulic production line, complete with automatic palletizing and pallet systems. It produces over 15,000 hollow blocks per day, stably supplying local housing and road construction projects.',
@@ -947,7 +947,7 @@
       search_placeholder: 'Rechercher des modèles, équipements, pages…',
       search_empty: 'Aucun résultat correspondant trouvé',
       ca_title: 'Études de cas clients',
-      ca_intro: 'Du Nigeria à la Tanzanie, les équipements Auken desservent des briqueteries et des fournisseurs de matériaux de construction dans toute l\'Afrique. Voici des études de cas clients (affichage fictif – à remplacer par des images et un texte réels avant le lancement).',
+      ca_intro: 'Du Nigeria à la Tanzanie, les équipements Auken desservent des briqueteries et des fournisseurs de matériaux de construction dans toute l\'Afrique. Voici des études de cas clients.',
       ca1_title: 'Nigeria · Briqueterie de Lagos',
       ca1_meta: 'Ligne de production hydraulique entièrement automatique QT-6-15',
       ca1_desc: 'Le client a installé une nouvelle briqueterie à la périphérie de Lagos, introduisant la ligne de production hydraulique entièrement automatique QT-6-15, complétée par des systèmes de palettisation et de palettes automatiques. Elle produit plus de 15 000 blocs creux par jour, alimentant de manière stable les projets de logement et de construction routière locaux.',
@@ -1369,7 +1369,7 @@
       search_placeholder: 'ابحث عن الطرازات والمعدات والصفحات…',
       search_empty: 'لم يتم العثور على نتائج مطابقة',
       ca_title: 'حالات العملاء',
-      ca_intro: 'من نيجيريا إلى تنزانيا، تخدم معدات Auken مصانع البلوك وموردي مواد البناء في جميع أنحاء أفريقيا. فيما يلي دراسات حالة للعملاء (عرض مؤقت – يُرجى استبداله بصور ونصوص فعلية قبل الإطلاق).',
+      ca_intro: 'من نيجيريا إلى تنزانيا، تخدم معدات Auken مصانع البلوك وموردي مواد البناء في جميع أنحاء أفريقيا. فيما يلي دراسات حالة للعملاء.',
       ca1_title: 'نيجيريا · مصنع بلوك لاغوس',
       ca1_meta: 'خط إنتاج هيدروليكي أوتوماتيكي بالكامل QT-6-15',
       ca1_desc: 'أنشأ العميل مصنع بلوك جديداً في ضواحي لاغوس، واستورد خط الإنتاج الهيدروليكي الأوتوماتيكي بالكامل QT-6-15، مكتملاً بأنظمة التكديس التلقائي والمنصات. ينتج أكثر من 15,000 كتلة مجوفة يومياً، ليوفّر بثبات مشاريع الإسكان والطرق المحلية.',
