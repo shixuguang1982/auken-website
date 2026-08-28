@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-i18n="pt_video">试机视频 · Auken Machinery</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="subpage">
+<header class="sub-head">
+  <a href="brick-semi.html" class="sub-back" id="subBack" data-i18n="back">← 返回</a>
+  <span class="sub-brand">AUKEN</span>
+</header>
+
+<main class="about gallery">
+  <section class="block">
+    <h2 class="block-title" id="vTitle">试机视频</h2>
+    <p class="block-desc" id="vDesc"></p>
+    <div class="video-grid" id="vGrid"></div>
+  </section>
+
+  <footer class="sub-foot">
+    <span>Zhengzhou Auken Machinery Equipment Co., Ltd.</span>
+  </footer>
+</main>
+<script src="subi18n.js"></script>
+<!-- <<<AUKEN_VIDEO_START>>> -->
+<script>
+  var V = {
+    "qm435a": {
+      zh: { name: "QM4-35A", desc: "QM4-35A 试机视频" },
+      en: { name: "QM4-35A", desc: "QM4-35A test-run video" },
+      fr: { name: "QM4-35A", desc: "Vidéo d'essai QM4-35A" },
+      ar: { name: "QM4-35A", desc: "فيديو تجربة QM4-35A" },
+      vids: []
+    },
+    "qm435b": {
+      zh: { name: "QM4-35B", desc: "QM4-35B 试机视频" },
+      en: { name: "QM4-35B", desc: "QM4-35B test-run video" },
+      fr: { name: "QM4-35B", desc: "Vidéo d'essai QM4-35B" },
+      ar: { name: "QM4-35B", desc: "فيديو تجربة QM4-35B" },
+      vids: []
+    },
+    "qmy435c": {
+      zh: { name: "QMY4-35C", desc: "QMY4-35C 试机视频" },
+      en: { name: "QMY4-35C", desc: "QMY4-35C test-run video" },
+      fr: { name: "QMY4-35C", desc: "Vidéo d'essai QMY4-35C" },
+      ar: { name: "QMY4-35C", desc: "فيديو تجربة QMY4-35C" },
+      vids: []
+    },
+    "qm440a": {
+      zh: { name: "QM4-40A", desc: "QM4-40A 试机视频" },
+      en: { name: "QM4-40A", desc: "QM4-40A test-run video" },
+      fr: { name: "QM4-40A", desc: "Vidéo d'essai QM4-40A" },
+      ar: { name: "QM4-40A", desc: "فيديو تجربة QM4-40A" },
+      vids: []
+    },
+    "qm440b": {
+      zh: { name: "QM4-40B", desc: "QM4-40B 试机视频" },
+      en: { name: "QM4-40B", desc: "QM4-40B test-run video" },
+      fr: { name: "QM4-40B", desc: "Vidéo d'essai QM4-40B" },
+      ar: { name: "QM4-40B", desc: "فيديو تجربة QM4-40B" },
+      vids: []
+    },
+    "qm426": {
+      zh: { name: "QM4-26", desc: "QM4-26 试机视频" },
+      en: { name: "QM4-26", desc: "QM4-26 test-run video" },
+      fr: { name: "QM4-26", desc: "Vidéo d'essai QM4-26" },
+      ar: { name: "QM4-26", desc: "فيديو تجربة QM4-26" },
+      vids: []
+    }
+  };
+  var lang = (function(){ try { return sessionStorage.getItem('auken_lang'); } catch(e){ return null; } })() || document.documentElement.lang || 'zh';
+  var m = (location.search.match(/[?&]m=([^&]+)/) || [,''])[1];
+  var d = V[m];
+  var vTitle = document.getElementById('vTitle');
+  var vDesc = document.getElementById('vDesc');
+  var grid = document.getElementById('vGrid');
+  if (!d) {
+    vTitle.textContent = '暂无视频';
+    vDesc.textContent = '该型号暂未上传试机视频，敬请期待。';
+  } else {
+    vTitle.textContent = d[lang].name;
+    vDesc.textContent = d[lang].desc;
+    if (!d.vids || !d.vids.length) {
+      var empty = document.createElement('p');
+      empty.className = 'video-empty';
+      empty.textContent = '暂无视频';
+      grid.appendChild(empty);
+    } else {
+      d.vids.forEach(function (src) {
+        var item = document.createElement('div');
+        item.className = 'video-item';
+        var v = document.createElement('video');
+        v.src = 'vid/' + src; v.controls = true; v.playsInline = true;
+        v.setAttribute('preload', 'metadata');
+        var cap = document.createElement('div');
+        cap.className = 'video-cap';
+        cap.textContent = d[lang].name + ' — ' + src.replace(/\.mp4$/, '');
+        item.appendChild(v);
+        item.appendChild(cap);
+        grid.appendChild(item);
+      });
+    }
+  }
+  (function () {
+    var back = document.getElementById('subBack');
+    if (!back) return;
+    var ref = document.referrer || '';
+    var sameSite = ref.indexOf(location.protocol + '//' + location.host) === 0;
+    back.addEventListener('click', function (e) {
+      if (sameSite && history.length > 1) { e.preventDefault(); history.back(); }
+    });
+  })();
+</script>
+    <!-- <<<AUKEN_VIDEO_END>>> -->
+
+<script src="cart.js"></script>
+</body>
+</html>

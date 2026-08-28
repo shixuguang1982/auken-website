@@ -29,6 +29,11 @@
       <!-- 反垃圾蜜罐（FormSubmit 标准做法） -->
       <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
 
+      <!-- 访客来源信息（前端 JS 获取，随邮件询盘一并提交，便于销售跟进客户所在国家/地区） -->
+      <input type="hidden" name="ip" id="iqIp" value="">
+      <input type="hidden" name="location" id="iqLoc" value="">
+      <p class="iq-privacy">提交即表示您同意我们记录您的访问来源（IP / 地区）信息，以便更好地跟进您的询盘。</p>
+
       <!-- 姓名（选填） -->
       <label class="iq-label" id="iqNameLabel"></label>
       <input class="iq-input" id="iqName" name="name" type="text" autocomplete="name">
@@ -246,8 +251,26 @@
   });
 
   // —— WhatsApp 直接沟通：把询盘内容预填进 wa.me 链接 ——
-  // 号码取自公司 WhatsApp：+86 151 3620 9578 → wa.me 仅需数字（去 + 和空格）
-  var WA_NUMBER = '8615136209578';
+  // 号码取自公司 WhatsApp：+86 193 3719 6225 → wa.me 仅需数字（去 + 和空格）
+  var WA_NUMBER = '8619337196225';
+
+  // 获取访客 IP / 地理位置，随邮件询盘一并提交（便于销售跟进客户来源国家/地区）
+  (function () {
+    try {
+      fetch('https://ipapi.co/json/')
+        .then(function (r) { return r.json(); })
+        .then(function (d) {
+          var ipEl = document.getElementById('iqIp');
+          var locEl = document.getElementById('iqLoc');
+          if (ipEl) ipEl.value = (d && d.ip) || '';
+          if (locEl && d) {
+            var parts = [d.city, d.region, d.country_name].filter(Boolean);
+            locEl.value = parts.join(', ');
+          }
+        })
+        .catch(function () {});
+    } catch (e) {}
+  })();
   var waBtn = document.getElementById('iqWaBtn');
 
   function buildWaText() {

@@ -602,6 +602,7 @@ body.entered{ overflow:auto; }
   transition:background .2s ease, transform .2s ease, box-shadow .2s ease; }
 .iq-wa-btn:hover{ background:#1ebe5d; transform:translateY(-1px); box-shadow:0 8px 20px rgba(37,211,102,.35); }
 .iq-note{ font-size:12px; color:var(--muted); text-align:center; margin-top:6px; }
+.iq-privacy{ font-size:12px; color:var(--muted); line-height:1.5; margin:10px 0 0; }
 
 /* 提交成功视图 */
 .iq-success{ background:linear-gradient(180deg,#1b3a5c,#102a44);
