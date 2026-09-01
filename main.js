@@ -7,7 +7,7 @@
   var langMenu = document.getElementById('langMenu');
 
   /* ===== 多语言（问候屏 + 全站） ===== */
-                                                                                                                                                        /* <<<AUKEN_I18N_START>>> */
+                                                                                                                                                          /* <<<AUKEN_I18N_START>>> */
   var I18N = {
     zh: {
       hi: '嗨，朋友',
