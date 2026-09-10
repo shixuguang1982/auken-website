@@ -1,7 +1,14 @@
+# 开发产物（不上线）
+_source/
+tools/
+*.xlsx
+README.md
+
+# 本地环境与系统
+.workbuddy/
 node_modules/
 .DS_Store
-*.log
+Thumbs.db
 
-# 本地预览/备份，不入库
-server.js
-assets_bak/
+# 部署脚本自身（worker 目录保留，仅忽略本地测试产物）
+worker/_test.mjs

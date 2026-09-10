@@ -1,4 +1,4 @@
-/* 询盘购物车：跨页面共享（localStorage），右上角浮动图标 + 抽屉列表 + 一键询盘 */
+/* 询盘购物车：跨页面共享（localStorage），右下角浮动图标 + 抽屉列表 + 一键询盘 */
 (function () {
   'use strict';
   var KEY = 'auken_inquiry_cart';
@@ -13,26 +13,21 @@
     ar: { title: 'استفساري', empty: 'لم تتم إضافة منتجات', tip: 'تم تحديد {n} منتج', send: 'إرسال الاستفسار', del: 'حذف',
           msg: 'مرحبًا، أهتم بالآلات التالية من أكن، يرجى تقديم عرض سعر:\n' }
   };
-  var WHATSAPP = '+8619337196225';
-  var EMAIL = 'sales@aukenmachinery.com';
 
   function lang() {
     var l = document.documentElement.lang;
-    if (!I18N[l]) {
-      try { l = sessionStorage.getItem('auken_lang') || 'zh'; } catch (e) { l = 'zh'; }
-    }
-    return I18N[l] ? l : 'zh';
+    if (I18N[l]) return l;
+    try { l = sessionStorage.getItem('auken_lang') || 'en'; } catch (e) { l = 'en'; }
+    return I18N[l] ? l : 'en';
   }
-  function getCart() {
-    try { return JSON.parse(localStorage.getItem(KEY) || '[]'); } catch (e) { return []; }
-  }
-  function setCart(arr) {
-    try { localStorage.setItem(KEY, JSON.stringify(arr)); } catch (e) {}
-  }
-  function addItem(name, tag, price) {
+  function getCart() { try { return JSON.parse(localStorage.getItem(KEY) || '[]'); } catch (e) { return []; } }
+  function setCart(arr) { try { localStorage.setItem(KEY, JSON.stringify(arr)); } catch (e) {} }
+
+  function addItem(name, tag) {
+    if (!name) return;
     var arr = getCart();
     if (!arr.some(function (it) { return it.name === name; })) {
-      arr.push({ name: name, tag: tag || '', price: price || '' });
+      arr.push({ name: name, tag: tag || '' });
       setCart(arr);
     }
     render();
@@ -42,15 +37,13 @@
     render();
   }
 
-  /* 构建浮窗 DOM */
   var fab, badge, drawer, mask, listEl, countEl, sendBtn, titleEl;
+
   function build() {
     if (document.getElementById('cartFab')) return;
     fab = document.createElement('button');
     fab.id = 'cartFab'; fab.className = 'cart-fab'; fab.type = 'button';
-    // 首页(index)右上角有 HOME 按钮，购物袋右移避让；其余页贴右上角
-    var path = location.pathname.split('/').pop();
-    if (path === '' || path === 'index.html') fab.classList.add('cart-fab--home');
+    fab.setAttribute('aria-label', 'inquiry cart');
     fab.innerHTML = '&#128722;<span class="cart-badge" id="cartBadge" hidden>0</span>';
     document.body.appendChild(fab);
 
@@ -60,7 +53,7 @@
     drawer = document.createElement('div'); drawer.className = 'cart-drawer'; drawer.id = 'cartDrawer';
     drawer.innerHTML =
       '<div class="cart-head"><h3 id="cartTitle">我的询盘</h3>' +
-      '<button class="cart-close" id="cartClose" type="button">&times;</button></div>' +
+      '<button class="cart-close" id="cartClose" type="button" aria-label="close">&times;</button></div>' +
       '<div class="cart-list" id="cartList"></div>' +
       '<div class="cart-foot"><div class="cart-count-tip" id="cartCount"></div>' +
       '<button class="cart-send" id="cartSend" type="button">一键询盘</button></div>';
@@ -83,30 +76,32 @@
 
   function sendInquiry() {
     if (!getCart().length) return;
-    // 跳转到询盘表单页（客户填联系方式 + 确认产品清单）
-    window.location.href = 'inquiry.html';
+    // 跳转到询盘表单页，表单会读取购物车预填产品清单
+    window.location.href = 'contact.html?cart=1';
+  }
+
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (ch) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch];
+    });
   }
 
   function render() {
     if (!fab) build();
     var arr = getCart();
-    var t = I18N[lang()];
-    // 空车时隐藏整个浮窗（图标 + 角标）
+    var t = I18N[lang()] || I18N.en;
     if (!arr.length) {
       fab.hidden = true;
-      drawer.classList.remove('open');
-      mask.classList.remove('open');
+      if (drawer) drawer.classList.remove('open');
+      if (mask) mask.classList.remove('open');
       return;
     }
     fab.hidden = false;
-    // 角标
     if (arr.length) { badge.hidden = false; badge.textContent = arr.length; }
     else { badge.hidden = true; }
-    // 抽屉内容
     if (titleEl) titleEl.textContent = t.title;
     if (countEl) countEl.textContent = arr.length ? t.tip.replace('{n}', arr.length) : '';
-    if (sendBtn) sendBtn.disabled = !arr.length;
-    if (sendBtn) sendBtn.textContent = t.send;
+    if (sendBtn) { sendBtn.disabled = !arr.length; sendBtn.textContent = t.send; }
     if (!listEl) return;
     listEl.innerHTML = '';
     if (!arr.length) {
@@ -115,11 +110,9 @@
     }
     arr.forEach(function (it) {
       var row = document.createElement('div'); row.className = 'cart-item';
-      var tag = it.tag ? '<span class="cart-item-tag">' + it.tag + '</span>' : '';
-      var price = it.price ? '<span class="cart-item-price">EXW ' + it.price + '</span>' : '';
-      row.innerHTML = '<div class="cart-item-main"><span class="cart-item-name">' + it.name + '</span>' + tag + '</div>' +
-        price +
-        '<button class="cart-del" type="button" title="' + t.del + '">&times;</button>';
+      var tag = it.tag ? '<span class="cart-item-tag">' + esc(it.tag) + '</span>' : '';
+      row.innerHTML = '<div class="cart-item-main"><span class="cart-item-name">' + esc(it.name) + '</span>' + tag + '</div>' +
+        '<button class="cart-del" type="button" title="' + esc(t.del) + '" aria-label="' + esc(t.del) + '">&times;</button>';
       row.querySelector('.cart-del').addEventListener('click', function () { removeItem(it.name); });
       listEl.appendChild(row);
     });
@@ -128,7 +121,7 @@
   /* 暴露给各页面"加入询盘"按钮调用 */
   window.AukenCart = { add: addItem, remove: removeItem, render: render, open: openDrawer };
 
-  document.addEventListener('DOMContentLoaded', function () { build(); render(); });
-  // 若 DOM 已就绪（脚本在 body 末尾）立即构建
-  if (document.readyState !== 'loading') { build(); render(); }
+  function init() { build(); render(); }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
 })();

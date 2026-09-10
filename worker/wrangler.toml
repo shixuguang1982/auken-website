@@ -1,0 +1,20 @@
+name = "auken-visitor-tracker"
+main = "worker.js"
+compatibility_date = "2024-09-23"
+
+# 部署到你的域名（Cloudflare 橙云代理，流量先过 Worker 再到 GitHub Pages）
+# 根域名与 www 都经过本 Worker，两个都要统计
+zone_name = "aukemachinery.com"
+routes = [
+  "aukemachinery.com/*",
+  "www.aukenmachinery.com/*"
+]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "auken_visits"
+# 执行 `wrangler d1 create auken_visits` 后，把返回的 uuid 填到下面
+database_id = "REPLACE_WITH_YOUR_D1_ID"
+
+# 查看密码不要写死在这里（会进 git 历史）。
+# 上线前务必执行：wrangler secret put STATS_KEY  然后输入你的强密码

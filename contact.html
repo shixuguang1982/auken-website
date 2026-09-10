@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact AUKEN — Block Machine Manufacturer</title>
+<meta name="description" content="Contact Zhengzhou AUKEN Machinery. Tell us your daily output target, raw material and budget — we reply with a configuration proposal within 24 hours.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="contact">
+
+<section class="section section--tight" style="background:var(--ink);color:#fff">
+  <div class="container">
+    <span class="eyebrow" data-i18n="nav_contact">Contact</span>
+    <h1 style="font-size:clamp(28px,4vw,42px);margin-bottom:10px" data-i18n="ct_title">Contact Us</h1>
+    <p style="color:rgba(255,255,255,.7);max-width:60ch" data-i18n="ct_lead">Tell us your output target, raw material and budget.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container cta-grid">
+    <div>
+      <h2 style="font-size:clamp(22px,3vw,30px);margin-bottom:18px" data-i18n="foot_contact">Contact</h2>
+      <div class="cta-ways" style="gap:14px">
+        <a class="cta-way" style="border-color:var(--line);color:var(--ink)" href="https://wa.me/8619337196225" target="_blank" rel="noopener">
+          <b>WhatsApp</b><span style="color:var(--ink-3)">+86 193 3719 6225</span>
+        </a>
+        <a class="cta-way" style="border-color:var(--line);color:var(--ink)" href="mailto:sales@aukenmachinery.com">
+          <b>Email</b><span style="color:var(--ink-3)">sales@aukenmachinery.com</span>
+        </a>
+        <div class="cta-way" style="border-color:var(--line);color:var(--ink)">
+          <b data-i18n="foot_about">Address</b><span style="color:var(--ink-3)">Zhengzhou, Henan, China</span>
+        </div>
+        <div class="cta-way" style="border-color:var(--line);color:var(--ink)">
+          <b data-i18n="ct_hours">Business hours</b><span style="color:var(--ink-3)" data-i18n="ct_hours_v">Mon–Sat 8:30–18:00 (Beijing Time)</span>
+        </div>
+      </div>
+      <div style="margin-top:24px">
+        <a class="btn btn--wa" href="https://wa.me/8619337196225" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+    </div>
+
+    <div class="form-card">
+      <form id="inquiryForm">
+        <div class="form-row"><label data-i18n="form_name">Name</label><input id="fName" name="name" required></div>
+        <div class="form-row"><label data-i18n="form_email">Email</label><input id="fEmail" name="email" type="email"></div>
+        <div class="form-row"><label data-i18n="form_phone">Phone / WhatsApp</label><input id="fPhone" name="phone"></div>
+        <div class="form-row"><label data-i18n="form_country">Country</label><input id="fCountry" name="country"></div>
+        <div class="form-row"><label data-i18n="form_interest">Machine of interest</label><select id="fInterest" name="machine"></select></div>
+        <div class="form-row"><label data-i18n="form_msg">Message</label><textarea id="fMsg" name="message" placeholder="Daily output target, block type, budget…"></textarea></div>
+        <button class="btn btn--primary btn--block" type="submit" data-i18n="form_submit">Send Inquiry</button>
+        <div class="form-msg" id="formMsg"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script src="data/i18n.js"></script>
+<script src="data/i18n-extra.js"></script>
+<script src="data/content.js"></script>
+<script src="assets/app.js"></script>
+<script src="cart.js"></script>
+
+</body>
+</html>

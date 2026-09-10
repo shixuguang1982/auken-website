@@ -1,103 +1,145 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title data-i18n="pt_index">奥肯机械 | Auken Machinery</title>
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AUKEN | Block Making Machines from China — Manual to Automatic Lines</title>
+<meta name="description" content="Zhengzhou AUKEN Machinery builds block making machines, hydraulic block lines, mixers and moulds. 20+ models from 300 to 19,000 blocks per day. Exported to 40+ countries.">
+<link rel="stylesheet" href="assets/style.css">
 </head>
-<body>
-  <!-- ===== 问候语（进网站的第一道门，仿 Win10 重装问候） ===== -->
-  <div id="welcome" class="welcome">
-    <!-- 左上角 AUKEN 商标 -->
-    <div class="brand-mark">AUKEN</div>
+<body data-page="home">
 
-    <!-- 右上角语言选择 -->
-    <div class="lang-switch" id="langSwitch">
-      <button class="lang-current" id="langCurrent" type="button">中文 <span class="caret">▾</span></button>
-      <ul class="lang-menu" id="langMenu" hidden>
-        <li data-lang="zh">中文</li>
-        <li data-lang="en">English</li>
-        <li data-lang="fr">Français</li>
-        <li data-lang="ar">العربية</li>
-      </ul>
+<!-- ===== Hero ===== -->
+<section class="hero">
+  <div class="hero-bg" style="background-image:url('img/hero-factory.webp')"></div>
+  <div class="container hero-inner">
+    <span class="eyebrow" data-i18n="hero_eyebrow">Zhengzhou, China · Block Machine Manufacturer</span>
+    <h1 data-i18n="hero_title">From one machine<br>to a full <em>production line</em></h1>
+    <p class="hero-lead" data-i18n="hero_lead">Over 20 models, from 300 to 19,000 blocks per day.</p>
+    <div class="hero-cta">
+      <a class="btn btn--primary" href="products.html" data-i18n="hero_cta1">Browse Machines</a>
+      <a class="btn btn--wa" href="https://wa.me/8619337196225" target="_blank" rel="noopener" data-i18n="hero_cta2">Contact us on WhatsApp</a>
     </div>
-
-    <div class="welcome-inner">
-      <div class="hi" data-i18n="hi"></div>
-      <h1 class="welcome-title" data-i18n="title">欢迎来到奥肯机械</h1>
-      <button id="enterBtn" class="enter-btn" type="button">
-        <span data-i18n="enter">点击进入</span><span class="arrow">&rarr;</span>
-      </button>
+    <div class="hero-facts">
+      <div><b>2013</b><span data-i18n="st1">成立年份</span></div>
+      <div><b>40+</b><span data-i18n="st2">出口国家</span></div>
+      <div><b>800+</b><span data-i18n="st3">服务客户</span></div>
+      <div><b>20+</b><span data-i18n="st4">设备型号</span></div>
     </div>
   </div>
+</section>
 
-  <!-- ===== 主站：一级导航（纵向，从上往下，带动画载入） ===== -->
-  <main id="site" class="site" hidden>
-    <!-- 左上角 AUKEN 商标 -->
-    <div class="brand-mark nav-brand">AUKEN</div>
-
-    <!-- 右上角回到欢迎页按钮 -->
-    <button id="backToWelcome" class="back-welcome" type="button">HOME</button>
-
-    <div class="nav-page">
-      <ul class="nav-list">
-        <li class="nav-item" style="--i:0">
-          <a href="about.html" class="nav-link">
-            <span class="nav-idx">01</span>
-            <span class="nav-label" data-i18n="nav1">关于奥肯</span>
-            <span class="nav-arrow">&rarr;</span>
-          </a>
-        </li>
-        <li class="nav-item" style="--i:1">
-          <a href="brick.html" class="nav-link">
-            <span class="nav-idx">02</span>
-            <span class="nav-label" data-i18n="nav2">制砖机目录</span>
-            <span class="nav-arrow">&rarr;</span>
-          </a>
-        </li>
-        <li class="nav-item" style="--i:2">
-          <a href="cases.html" class="nav-link">
-            <span class="nav-idx">03</span>
-            <span class="nav-label" data-i18n="nav3">客户案例</span>
-            <span class="nav-arrow">&rarr;</span>
-          </a>
-        </li>
-        <li class="nav-item" style="--i:3">
-          <a href="agent.html" class="nav-link">
-            <span class="nav-idx">04</span>
-            <span class="nav-label" data-i18n="nav4">成为代理商</span>
-            <span class="nav-arrow">&rarr;</span>
-          </a>
-        </li>
-        <li class="nav-item" style="--i:4">
-          <a href="faq.html" class="nav-link">
-            <span class="nav-idx">05</span>
-            <span class="nav-label" data-i18n="nav5">常见问题</span>
-            <span class="nav-arrow">&rarr;</span>
-          </a>
-        </li>
-        <li class="nav-item" style="--i:5">
-          <a href="service.html" class="nav-link">
-            <span class="nav-idx">06</span>
-            <span class="nav-label" data-i18n="nav6">售后服务</span>
-            <span class="nav-arrow">&rarr;</span>
-          </a>
-        </li>
-      </ul>
+<!-- ===== 产品分类 ===== -->
+<section class="section">
+  <div class="container">
+    <div class="sec-head">
+      <span class="eyebrow" data-i18n="sec_cats_eyebrow">Product Range</span>
+      <h2 data-i18n="sec_cats_title">Choose by output and budget</h2>
+      <p data-i18n="sec_cats_lead">From a single manual press to a fully automatic hydraulic line.</p>
     </div>
+    <div class="cat-grid" id="catGrid"></div>
+  </div>
+</section>
 
-    <!-- 右下角 WhatsApp 浮动图标（点开直跳 wa.me） -->
-    <a id="waFab" class="wa-fab" href="https://wa.me/8619337196225?text=Hello%2C%20I%27m%20interested%20in%20your%20brick%20machines" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp">
-      <svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true">
-        <path fill="currentColor" d="M19.11 17.205c-.372 0-1.088 1.39-1.518 1.39a.63.63 0 0 1-.315-.1c-.802-.402-1.504-.817-2.163-1.447-.545-.516-1.146-.962-1.566-1.613-.452-.706-.262-.79-.262-.79.293-.293.624-.779.793-1.117.054-.107.108-.214.108-.317 0-.118-.04-.213-.108-.213-.108 0-.213.04-.213.04-.214 0-.376-.04-.589-.04-.215 0-.485.054-.754.162-.27.108-.59.27-.644.7-.054.43.214.86.43 1.39.214.535.43 1.07.86 1.555.43.484 1.016 1.07 1.66 1.555.644.484 1.394.967 2.144 1.34.75.376 1.61.752 2.466.752.857 0 1.61-.214 2.144-.537.535-.32.858-.806.805-1.31-.054-.484-.43-.86-.967-.967z"/>
-        <path fill="currentColor" d="M26.576 5.363c-2.59-2.59-6.04-4.018-9.71-4.018-7.575 0-13.737 6.16-13.737 13.736 0 2.413.622 4.752 1.806 6.812L2.5 28.5l6.823-1.79a13.69 13.69 0 0 0 6.55 1.665h.005c7.575 0 13.737-6.16 13.737-13.735 0-3.668-1.43-7.117-4.04-9.276zM15.873 26.396a11.46 11.46 0 0 1-5.84-1.6l-.42-.247-4.05 1.063 1.083-3.948-.273-.435a11.49 11.49 0 0 1-1.76-6.082c0-6.342 5.165-11.508 11.515-11.508 3.077 0 5.97 1.2 8.144 3.374s3.374 5.066 3.374 8.143c0 6.343-5.166 11.24-11.515 11.24z"/>
-      </svg>
-      <span class="wa-fab-text" data-i18n="wa_fab">WhatsApp</span>
-    </a>
-  </main>
+<!-- ===== 热门机型 ===== -->
+<section class="section section--gray">
+  <div class="container">
+    <div class="sec-head">
+      <span class="eyebrow" data-i18n="sec_models_eyebrow">Popular Models</span>
+      <h2 data-i18n="sec_models_title">Our best sellers</h2>
+      <p data-i18n="sec_models_lead">These models ship the most.</p>
+    </div>
+    <div class="m-grid" id="modelGrid"></div>
+    <div style="margin-top:32px;text-align:center">
+      <a class="btn btn--dark" href="products.html" data-i18n="btn_view_all">View all models</a>
+    </div>
+  </div>
+</section>
 
-  <script src="main.js"></script>
-  <script src="cart.js"></script>
+<!-- ===== 为什么选我们 ===== -->
+<section class="section">
+  <div class="container">
+    <div class="sec-head">
+      <span class="eyebrow" data-i18n="sec_why_eyebrow">Why AUKEN</span>
+      <h2 data-i18n="sec_why_title">Beyond machines, we care about uptime</h2>
+      <p data-i18n="sec_why_lead">Delivery is only the beginning — running every day is what matters.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-item"><div class="why-num">01</div><h3 data-i18n="why1_h">Factory direct</h3><p data-i18n="why1_p">We build in our own factory.</p></div>
+      <div class="why-item"><div class="why-num">02</div><h3 data-i18n="why2_h">Built for African conditions</h3><p data-i18n="why2_p">Adapted to local voltage and aggregate.</p></div>
+      <div class="why-item"><div class="why-num">03</div><h3 data-i18n="why3_h">Complete line design</h3><p data-i18n="why3_p">Batching, mixing, forming and stacking.</p></div>
+      <div class="why-item"><div class="why-num">04</div><h3 data-i18n="why4_h">Installation &amp; training</h3><p data-i18n="why4_p">Remote video-guided installation.</p></div>
+      <div class="why-item"><div class="why-num">05</div><h3 data-i18n="why5_h">Genuine spare parts</h3><p data-i18n="why5_p">Wear parts in stock, 3–7 days to port.</p></div>
+      <div class="why-item"><div class="why-num">06</div><h3 data-i18n="why6_h">24/7 fast response</h3><p data-i18n="why6_p">We reply within 2 hours.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 案例 ===== -->
+<section class="section section--gray">
+  <div class="container">
+    <div class="sec-head">
+      <span class="eyebrow" data-i18n="sec_cases_eyebrow">Case Studies</span>
+      <h2 data-i18n="nav3">客户案例</h2>
+    </div>
+    <div class="case-grid" id="caseGrid"></div>
+    <div style="margin-top:32px;text-align:center">
+      <a class="btn btn--ghost" href="cases.html" data-i18n="btn_view_all_cases">View all cases</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 出口市场 ===== -->
+<section class="section">
+  <div class="container">
+    <div class="sec-head sec-head--center">
+      <span class="eyebrow" data-i18n="sec_market_eyebrow">Export Markets</span>
+      <h2 data-i18n="sec_market_title">Shipping to 40+ countries</h2>
+      <p data-i18n="sec_market_lead">Block factories across Africa, South America and the Caribbean run on AUKEN machines.</p>
+    </div>
+    <div class="badge-row" style="justify-content:center">
+      <span class="badge">Nigeria</span><span class="badge">Ghana</span><span class="badge">Kenya</span>
+      <span class="badge">Tanzania</span><span class="badge">Cameroon</span><span class="badge">Guinea</span>
+      <span class="badge">South Africa</span><span class="badge">Haiti</span><span class="badge">Colombia</span>
+      <span class="badge">Senegal</span><span class="badge">Uganda</span><span class="badge">Zambia</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="section cta">
+  <div class="container cta-grid">
+    <div>
+      <span class="eyebrow" data-i18n="nav_contact">Contact</span>
+      <h2 data-i18n="cta_h">Tell us your output target</h2>
+      <p data-i18n="cta_p">Tell us how many blocks per day, your site size and budget.</p>
+      <div class="cta-ways">
+        <a class="cta-way" href="https://wa.me/8619337196225" target="_blank" rel="noopener">
+          <b>WhatsApp</b><span>+86 193 3719 6225</span>
+        </a>
+        <a class="cta-way" href="mailto:sales@aukenmachinery.com">
+          <b>Email</b><span>sales@aukenmachinery.com</span>
+        </a>
+      </div>
+    </div>
+    <div class="form-card">
+      <form id="inquiryForm">
+        <div class="form-row"><label data-i18n="form_name">Name</label><input id="fName" name="name" required></div>
+        <div class="form-row"><label data-i18n="form_email">Email</label><input id="fEmail" name="email" type="email"></div>
+        <div class="form-row"><label data-i18n="form_phone">Phone / WhatsApp</label><input id="fPhone" name="phone"></div>
+        <div class="form-row"><label data-i18n="form_msg">Message</label><textarea id="fMsg" name="message" placeholder="Daily output target, block type, budget…"></textarea></div>
+        <button class="btn btn--primary btn--block" type="submit" data-i18n="form_submit">Send Inquiry</button>
+        <div class="form-msg" id="formMsg"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script src="data/i18n.js"></script>
+<script src="data/i18n-extra.js"></script>
+<script src="data/content.js"></script>
+<script src="assets/app.js"></script>
+<script src="cart.js"></script>
+
 </body>
 </html>
