@@ -323,9 +323,14 @@
         }
         return true;
       });
+      /* 默认按分类顺序排：手动 → 半自动 → 全自动切块 → 全自动液压（大型设备靠后） */
+      var CAT_ORDER = ['manual', 'semi', 'auto', 'hydraulic'];
       if (order === 'pasc') list.sort(function (a, b) { return num(a.price) - num(b.price); });
       else if (order === 'pdesc') list.sort(function (a, b) { return num(b.price) - num(a.price); });
       else if (order === 'capdesc') list.sort(function (a, b) { return num(modelCap(b)) - num(modelCap(a)); });
+      else list.sort(function (a, b) {
+        return CAT_ORDER.indexOf(modelCat(a)) - CAT_ORDER.indexOf(modelCat(b));
+      });
 
       if (bar) bar.textContent = tf('result_count', '', { n: list.length });
       wrap.innerHTML = list.length ? list.map(modelCard).join('')
